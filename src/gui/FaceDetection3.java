@@ -10,6 +10,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.ByteArrayOutputStream;
@@ -98,45 +99,26 @@ public class FaceDetection3 extends javax.swing.JFrame {
                 		for (QrCode qr : detections) {
                 			System.out.println("message: '" + qr.message + "'");
                 		}
-//  					frame = BufferedImage2Mat(iPimg.getBufferedImage());
-  					
-//                    BufferedImage buff = Mat2BufferedImage(frame);
-                    
-//                  ImageIO.write(buff, "jpg", new File("E:/Data/temp.jpg"));  
-                  
-               		LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
-            	    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
-            	    Reader reader = new MultiFormatReader();
-            	    Result result = reader.decode(bitmap);
-            	    System.out.println("Barcode text is " + result.getText());
-                  		 
-//     					iPimg = frameGrabber.grab();
-////     					BufferedImage bufferedImage = iPimg.getBufferedImage();
-////     			        String inFile = "E:/Data/EEEE.jpg";
-//     			        frame = BufferedImage2Mat(iPimg.getBufferedImage());
-//     			        
-//                    	Graphics g = jPanel1.getGraphics();
-//                    	
-//                      faceDetector.detectMultiScale(frame, faceDetections);
-//
-//                           for (Rect rect : faceDetections.toArray()) {
-////                                System.out.println("Rect:x="+rect.x+"y="+rect.y+"width="+rect.width+"height="+rect.height);
-//                                Imgproc.rectangle(frame, new Point(rect.x, rect.y), new Point(rect.x + rect.width, rect.y + rect.height),
-//                                        new Scalar(0, 255,0));
-//                            }
-// 
+
+                    	Graphics g = jPanel1.getGraphics();
+//                    	  frame = BufferedImage2Mat(iPimg.getBufferedImage());
 //                           BufferedImage buff = Mat2BufferedImage(frame);
-//                           if (g.drawImage(buff, 0, 0, getWidth(), getHeight()-150 , 0, 0, buff.getWidth(), buff.getHeight(), null)) {
-//                               if (runnable == false) {
-////                                   System.out.println("Paused ..... ");
-//                                   this.wait();
-//                               }
-//                           }
-//          				Thread.sleep(100);
+                           if (g.drawImage(bufferedImage, 0, 0, getWidth(), getHeight()-150 , 0, 0, bufferedImage.getWidth(), bufferedImage.getHeight(), null)) {
+                               if (runnable == false) {
+//                                   System.out.println("Paused ..... ");
+                                   this.wait();
+                               }
+                           }
+          				Thread.sleep(100);
           			
+                   		LuminanceSource source = new BufferedImageLuminanceSource(bufferedImage);
+                	    BinaryBitmap bitmap = new BinaryBitmap(new HybridBinarizer(source));
+                	    Reader reader = new MultiFormatReader();
+                	    Result result = reader.decode(bitmap);
+                	    System.out.println("Barcode text is " + result.getText());
+                      		
                   	 
-                  	 
-                  	 } catch (Exception | NotFoundException | ChecksumException | FormatException    e) {
+                  	 } catch (Exception | NotFoundException | ChecksumException | FormatException | InterruptedException    e) {
 //          				e.printStackTrace();
           			}
 //                  }
